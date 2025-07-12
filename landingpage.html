@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html">
+<head>
+  <title>ReWear - Landing Page</title>
+  <style>
+    #close{
+        float: right;
+        display:block;
+        width: 30px;
+        padding: 5px;
+        height: auto;
+    }
+    nav{
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: 100vh;
+        background-color: white;
+        z-index: 100;
+        font-family: sans-serif;
+        padding: 1%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    nav ul li{
+        padding-right: 0;
+        padding-bottom: 10px;
+        text-decoration: none;
+    }
+    a{
+        text-decoration: none;
+        color: #BC6C25;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      padding: 20px;
+      background-color: #FEFAE0;
+    }
+
+    header {
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      background-color: #283618;
+      color: #fff;
+      padding: 15px 0px; 
+      border-radius: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img{
+      object-fit:scale-down;
+    }
+
+    .logo img {
+      height: 90px;
+      width: 150px;
+    }
+
+    .search-bar {
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    .banner {
+      margin: 20px 0;
+    }
+
+.banner img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+    .categories,
+    .products {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #283618;
+    }
+
+    .category-grid,
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .category-card {
+      background-color: #DDA15E;
+      color: #fff;
+      padding: 20px;
+      flex: 1 1 calc(33.33% - 30px);
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product-card {
+      background-color: #fff;
+      padding: 20px;
+      flex: 1 1 calc(20% - 30px);
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-card p {
+      font-weight: bold;
+      text-align: center;
+      color: #BC6C25;
+    }
+
+    @media (max-width: 768px) {
+      .category-card,
+      .product-card {
+        flex: 1 1 100%;
+      }
+
+      .search-bar {
+        height: 70%;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="ReWear Logo" />
+    </div>
+    <div style="display:flex; align-items:center; justify-self:flex-end;">
+      <input type="text" placeholder="Search clothes..." class="search-bar" />
+      <svg id="ham" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+    </div>
+    <section id="navigation-bar">
+        <nav id="nav">
+            <svg id="close" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z"/></svg>
+            <ul type="none">
+                <a href="/landingpage.html"><li>Home</li></a>
+                <a href="/itemListing.html"><li>Shop</li></a>
+                <a href="/UserDashboard.html"><li>Profile</li></a>
+                <a href="/signup.html"><li style="color:darkred; a:hover{color:rgb(67, 67, 249)}">Sign Up</li></a>
+            </ul>
+        </nav>
+    </section>
+  </header>
+  <section class="banner">
+    <img src="https://img.freepik.com/premium-photo/promoting-sustainable-fashion-textile-reuse-through-ecofriendly-clothing-with-recycling-symbols-concept-ecofriendly-fashion-sustainable-textiles-recycling-symbols-promoting-upcycling_918839-80624.jpg?w=2000" alt="Banner" />
+  </section>
+  <section class="categories">
+    <h2>Categories</h2>
+    <div class="category-grid">
+      <div class="category-card">Men</div>
+      <div class="category-card">Women</div>
+      <div class="category-card">Kids</div>
+      <div class="category-card">Summer Wear</div>
+      <div class="category-card">Winter Wear</div>
+      <div class="category-card">Ethnic</div>
+    </div>
+  </section>
+  <section class="products">
+    <h2>Product Listings</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="blue shirt.avif" alt="Shirt" />
+        <p>Blue Shirt</p>
+      </div>
+      <div class="product-card">
+        <img src="red dress.jpg" alt="dress" />
+        <p>Red Dress</p>
+      </div>
+      <div class="product-card">
+        <img src="jacket.jpg" alt="Jacket" />
+        <p>Leather Jacket</p>
+      </div>
+      <div class="product-card">
+        <img src="floral.jpg" alt="Skirt" />
+        <p>Printed Skirt</p>
+      </div>
+      <div class="product-card">
+        <img src="pant.jpg" alt="Pants" />
+        <p> Pants </p>
+      </div>
+    </div>
+  </section>
+  <script src="jquery.js"></script>
+   <script>
+    $(document).ready(function() {
+        //set the logo to be clickable
+        $('#logo').click(function() {
+            
+        });
+        // Function for the hamburger menu
+        let hamburger=document.getElementById("ham");
+        let close=document.getElementById("close");
+        hamburger.addEventListener("click",function(){
+            let nav=document.getElementById("nav");
+            if (nav.style.display==="none"){
+                nav.style.display="block";
+            }
+            else{
+                nav.style.display="none";
+            }   
+        });
+        // Function to close the hamburger menu
+        close.addEventListener("click",function(){
+            let nav=document.getElementById("nav");
+            if (nav.style.display==="block"){
+                nav.style.display="none";
+            }
+            else{
+                nav.style.display="block";
+            }   
+        });
+        // Function to close the hamburger menu when a link is clicked
+        let navLinks=document.querySelectorAll(".nav-link");
+        navLinks.forEach(function(link){
+            link.addEventListener("click",function(){
+                let nav=document.getElementById("nav");
+                if (nav.style.display==="block"){
+                    nav.style.display="none";
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

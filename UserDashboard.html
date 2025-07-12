@@ -16,8 +16,8 @@
         <nav id="nav">
             <svg id="close" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z"/></svg>
             <ul type="none">
-                <a href="/Landing-Page.html"><li>Home</li></a>
-                <a href="/Screen4.html"><li>Shop</li></a>
+                <a href="/landingpage.html"><li>Home</li></a>
+                <a href="/itemListing.html"><li>Shop</li></a>
                 <a href="/UserDashboard.html"><li>Profile</li></a>
                 <a href="/signup.html"><li style="color:darkred; a:hover{color:rgb(67, 67, 249)}">Sign Up</li></a>
             </ul>
@@ -89,44 +89,60 @@
                 }
             });
         });
-        // Fetch user profile data from backend API
-        fetch('/api/user/profile')
-            .then(response => response.json())
-            .then(data => {
-                $('#user-avatar').attr('src', data.avatar || '/static/images/default-avatar.png');
-                $('#user-name').text(data.name || 'Unknown User');
-                $('#user-email').text(data.email || '');
-            })
-            .catch(() => {
-                $('#user-name').text('Failed to load user');
-                $('#user-email').text('');
-            });
+        
+        // Fetch user data and populate the profile
+        fetch('http://localhost:5000/api/user/profile', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            $('#user-avatar').attr('src', data.avatar || '/static/images/default-avatar.png');
+            $('#user-name').text(data.name || 'Unknown User');
+            $('#user-email').text(data.email || '');
+        })
+        .catch(() => {
+            $('#user-name').text('Failed to load user');
+            $('#user-email').text('');
+        });
 
         // Fetch user listings
-        fetch('/api/user/listings')
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    data.forEach(listing => {
-                        $('#mylistings').append(`<div class="listing"><h3>${listing.title}</h3><p>${listing.description}</p></div>`);
-                    });
-                } else {
-                    $('#mylistings').html('<p>No listings yet.</p>');
-                }
-            });
+        fetch('http://localhost:5000/api/user/listings', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                data.forEach(listing => {
+                    $('#mylistings').append(`<div class="listing"><h3>${listing.title}</h3><p>${listing.description}</p></div>`);
+                });
+            } else {
+                $('#mylistings').html('<p>No listings yet.</p>');
+            }
+        });
 
         // Fetch user purchases
-        fetch('/api/user/purchases')
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    data.forEach(purchase => {
-                        $('#myPurchases').append(`<div class="purchase"><h3>${purchase.itemName}</h3><p>${purchase.details}</p></div>`);
-                    });
-                } else {
-                    $('#myPurchases').html('<p>No purchases yet.</p>');
-                }
-            });
+        fetch('http://localhost:5000/api/user/purchases', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                data.forEach(purchase => {
+                    $('#myPurchases').append(`<div class="purchase"><h3>${purchase.itemName}</h3><p>${purchase.details}</p></div>`);
+                });
+            } else {
+                $('#myPurchases').html('<p>No purchases yet.</p>');
+            }
+        });
     });
    </script>
 </body>
