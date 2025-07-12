@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWear | User Dashboard</title>
+    <link rel="stylesheet" href="UserDashboard.css">
+    <script src="jquery.js"></script>
+</head>
+<body>
+   <div id="logo" class="user-dashboard">
+        <img src="/logo.png" alt="ReWear Logo" width="70" height="70" />
+        <svg id="ham" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+   </div>
+   <section id="navigation-bar">
+        <nav id="nav">
+            <svg id="close" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z"/></svg>
+            <ul type="none">
+                <a href="/Landing-Page.html"><li>Home</li></a>
+                <a href="/Screen4.html"><li>Shop</li></a>
+                <a href="/UserDashboard.html"><li>Profile</li></a>
+                <a href="/signup.html"><li style="color:darkred; a:hover{color:rgb(67, 67, 249)}">Sign Up</li></a>
+            </ul>
+        </nav>
+    </section>
+   <div id="user-profile" class="user-dashboard">
+        <div>
+            <img id="user-avatar" src="default.png" alt="User Avatar" width="200" height="200" />
+        </div>
+        <div>
+            <h3 id="user-name">User Name</h3>
+            <p id="user-email">user@email.com</p>
+            <h4>About Me:</h4>
+            <p>User bio goes here...</p>
+            <h4>Socials:</h4>
+            <p>User socials go here...</p>
+            <h4>Location:</h4>
+            <p>User location goes here...</p>
+        </div>
+    </div>
+   </div>
+   <div class="user-dashboard">
+       <h2>My Listings</h2>
+        <div id="mylistings">
+
+        </div>
+   </div>
+   <div class="user-dashboard">
+       <h2>My Purchases</h2>
+        <div id="myPurchases">
+
+        </div>
+   </div>
+   <script>
+    $(document).ready(function() {
+        //set the logo to be clickable
+        $('#logo').click(function() {
+            
+        });
+        // Function for the hamburger menu
+        let hamburger=document.getElementById("ham");
+        let close=document.getElementById("close");
+        hamburger.addEventListener("click",function(){
+            let nav=document.getElementById("nav");
+            if (nav.style.display==="none"){
+                nav.style.display="block";
+            }
+            else{
+                nav.style.display="none";
+            }   
+        });
+        // Function to close the hamburger menu
+        close.addEventListener("click",function(){
+            let nav=document.getElementById("nav");
+            if (nav.style.display==="block"){
+                nav.style.display="none";
+            }
+            else{
+                nav.style.display="block";
+            }   
+        });
+        // Function to close the hamburger menu when a link is clicked
+        let navLinks=document.querySelectorAll(".nav-link");
+        navLinks.forEach(function(link){
+            link.addEventListener("click",function(){
+                let nav=document.getElementById("nav");
+                if (nav.style.display==="block"){
+                    nav.style.display="none";
+                }
+            });
+        });
+        // Fetch user profile data from backend API
+        fetch('/api/user/profile')
+            .then(response => response.json())
+            .then(data => {
+                $('#user-avatar').attr('src', data.avatar || '/static/images/default-avatar.png');
+                $('#user-name').text(data.name || 'Unknown User');
+                $('#user-email').text(data.email || '');
+            })
+            .catch(() => {
+                $('#user-name').text('Failed to load user');
+                $('#user-email').text('');
+            });
+
+        // Fetch user listings
+        fetch('/api/user/listings')
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    data.forEach(listing => {
+                        $('#mylistings').append(`<div class="listing"><h3>${listing.title}</h3><p>${listing.description}</p></div>`);
+                    });
+                } else {
+                    $('#mylistings').html('<p>No listings yet.</p>');
+                }
+            });
+
+        // Fetch user purchases
+        fetch('/api/user/purchases')
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    data.forEach(purchase => {
+                        $('#myPurchases').append(`<div class="purchase"><h3>${purchase.itemName}</h3><p>${purchase.details}</p></div>`);
+                    });
+                } else {
+                    $('#myPurchases').html('<p>No purchases yet.</p>');
+                }
+            });
+    });
+   </script>
+</body>
+</html>
