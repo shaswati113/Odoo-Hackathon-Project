@@ -25,3 +25,6 @@ app.use("/api/auth", authRoutes);
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+const clothesRoute = require("./routes/clothes");
+app.use("/api/clothes", clothesRoute);
