@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Product</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family:'Times New Roman', Times, serif, sans-serif;
+    }
+
+    body {
+      background-color: #fefae0;
+    }
+
+    .header {
+      background-color: #BC6C25;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header a {
+      font-style: italic;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .header .logo {
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #bc6c25;
+    }
+
+    form {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .left, .right {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .image-upload-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      min-height: 250px;
+    }
+
+    .image-upload-box input[type="file"] {
+      margin-top: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    .preview-title {
+      margin: 25px 0 10px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .image-preview-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .image-preview-row img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-section {
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button[type="submit"] {
+      background-color: #BC6C25;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #dda15e;
+    }
+
+    .searchbar {
+        background-color: #fefae0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 2px solid #bc6c25;
+    }
+
+    .searchbar form {
+        display: flex;
+        width: 80%;
+        border: 2px solid #bc6c25;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: #fff;
+    }
+
+    .searchbar input {
+        flex: 1;
+        padding: 8px 16px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        background-color: transparent;
+    }
+
+    .searchbar button {
+        padding: 0 16px;
+        background-color: #bc6c25;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .searchbar button:hover {
+        background-color: #dda15e;
+    } 
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Browse</a>
+      <a href="#">Login</a>
+      <a href="#">Signup</a>
+    </div>
+    <img src="logo.jpg" alt="logo" class="logo">
+  </div>
+
+  <div class="searchbar">
+  <form>
+    <input type="text" placeholder="Search products...">
+    <button type="submit">🔍</button>
+  </form>
+</div>
+
+
+  <div class="container">
+    <h2>Add a New Product</h2>
+    <form action="/api/add-product" method="POST" enctype="multipart/form-data">
+      <div class="left">
+        <div class="image-upload-box">
+          <label for="images">Upload Images</label>
+          <input type="file" id="images" name="images" accept="image/*" multiple required>
+        </div>
+      </div>
+
+      <div class="right">
+        <label for="name">Product Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">Product Description</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" required>
+
+        <label for="type">Type</label>
+        <input type="text" id="type" name="type" required>
+
+        <label for="size">Size</label>
+        <input type="text" id="size" name="size" required>
+
+        <label for="condition">Condition</label>
+        <input type="text" id="condition" name="condition" required>
+
+        <label for="tags">Tags (comma-separated)</label>
+        <input type="text" id="tags" name="tags">
+
+        <label for="availability">Availability</label>
+        <select id="availability" name="availability" required>
+          <option value="">Select...</option>
+          <option value="Available">Available</option>
+          <option value="Not Available">Not Available</option>
+        </select>
+
+        <label for="option">Swap or Redeem</label>
+        <select id="option" name="option" required>
+          <option value="">Choose...</option>
+          <option value="Swap">Swap</option>
+          <option value="Redeem with Points">Redeem with Points</option>
+        </select>
+
+        <div class="preview-title">Image Preview</div>
+        <div class="image-preview-row" id="preview"></div>
+      </div>
+
+      <div class="submit-section">
+        <button type="submit">Submit Product</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  const input = document.getElementById('images');
+  const preview = document.getElementById('preview');
+  let allFiles = [];
+
+  input.addEventListener('change', () => {
+    const files = Array.from(input.files);
+    allFiles = [...allFiles, ...files];
+
+    preview.innerHTML = ''; // Clear preview
+    allFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = document.createElement('img');
+        img.src = reader.result;
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+  </script>
+</body>
+</html>

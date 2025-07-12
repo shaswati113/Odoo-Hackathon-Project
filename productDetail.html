@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Item Listing</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+        const res = await fetch('/api/products');
+        const products = await res.json();
+
+        // Display first product as featured
+        const featured = products[0];
+        const featuredContainer = document.getElementById('featured');
+        featuredContainer.innerHTML = `
+            <img src="${featured.imageUrl}" alt="${featured.name}">
+            <div class="product-info">
+              <h2>${featured.name}</h2>
+              <p>${featured.description}</p>
+              <button class="availability-btn" ${featured.availability ? '' : 'disabled'}>
+              ${featured.availability ? (featured.option === 'swap' ? 'Available for Swap' : 'Redeem via Points') : 'Not Available'}
+              </button>
+            </div>
+         `;
+
+        // Display remaining products in grid
+        const grid = document.getElementById('product-list');
+        products.slice(1).forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+        <img src="${prod.imageUrl}" alt="${prod.name}">
+        <h4>${prod.name}</h4>
+        <p>${prod.description.substring(0, 50)}...</p>
+        `;
+        grid.appendChild(card);
+        });
+    });
+    </script>
+    <style>
+        * {
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Times New Roman', Times, serif, sans-serif;
+        }
+        body {
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;  
+            align-items: center;             
+            width: 100%;
+            padding: 9px 20px;
+            background-color: #BC6C25;
+            border-bottom: 2px solid #bc6c25;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links a {
+            font-style: italic;
+            color: black;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .logo {
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .searchbar {
+            background-color: #fefae0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid #bc6c25;
+        }
+
+        .searchbar form {
+            display: flex;
+            width: 80%;
+            border: 2px solid #bc6c25;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .searchbar input {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background-color: transparent;
+        }
+
+        .searchbar button {
+            padding: 0 16px;
+            background-color: #bc6c25;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .searchbar button:hover {
+            background-color: #dda15e;
+        }
+
+        .featured-product {
+            display: flex;
+            gap: 20px;
+            background: #fff7ea;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px auto;
+            max-width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-product img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-info h2 {
+            font-size: 28px;
+            color: #bc6c25;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .availability-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #bc6c25;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .availability-btn:hover:enabled {
+            background-color: #dda15e;
+        }
+
+        .availability-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 95%;
+            margin: auto;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h4 {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0 5px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-links">
+            <a href="">Home</a>
+            <a href="">Browse</a>
+            <a href="">Login</a>
+            <a href="">Signup</a>
+        </div>
+        <img src="logo.jpg" alt="logo" class="logo">
+    </div>
+
+    <div class="searchbar">
+        <form>
+            <input type="text" id="search" placeholder="Search products...">
+            <button type="submit">🔍</button>
+        </form>
+    </div>
+
+
+  <main>
+    <div class="featured-product" id="featured">
+      <!-- Featured product will load here -->
+    </div>
+
+    <div class="product-grid" id="product-list">
+      <!-- More product cards will load here -->
+    </div>
+  </main>
+
+</body>
+</html>
