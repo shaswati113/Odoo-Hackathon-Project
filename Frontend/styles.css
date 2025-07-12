@@ -1,0 +1,76 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f0f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('rewear.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.7); 
+  z-index: -1;
+}
+
+.form-container{
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+button{
+    width: 100%;
+    padding: 13px;
+    background-color: #47cc56;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover{
+    background-color:#13ae25;
+}
+
+h2{
+    text-align: center;
+    margin:0 0 20px 0;
+    color: #333;
+}
+
+img{
+    width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #4CAF50;  
+      padding: 4px; 
+}
+
+a{
+    color: #0080ff;
+    text-decoration: none;
+}
+
+.forgot{
+    display: block;
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
